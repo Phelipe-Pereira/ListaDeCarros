@@ -1,7 +1,11 @@
 import express from 'express';
 const app = express();
 
-var carros = ['Fiesta', 'Saveiro'];
+var carros = [
+    {name: "Focus", montadora: "Ford", ano: 2010},
+    {name: "Fiesta", montadora: "Ford", ano: 2015},
+    {name: "Fusion", montadora: "Ford", ano: 2025}
+];
 
 app.use(express.urlencoded({ extended: true}))
 
