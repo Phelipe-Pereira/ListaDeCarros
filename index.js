@@ -11,6 +11,7 @@ var carros = [
     {name: "Gol", preco: 40000, montadora: "Volkswagen"}
 ];
 
+app.use(express.json());
 app.use(express.urlencoded({ extended: true}))
 
 app.get('/', (req, res) =>{
@@ -25,12 +26,19 @@ app.get('/user/:name', (req, res) =>{
     res.send("Usuário: " + req.params.name);
 });
 
-app.post('/cars/', (req, res) =>{
-    let name = req.body.name;
-    carros[(carros.length)] = name;
+app.get('/cars/', (req, res) => {
+    return res.json(carros)
+})
 
-    return res.json([carros[(carros.length - 1)]]);
+app.post('/cars/', (req, res) => {
+    let { name, preco, montadora } = req.body;
+
+    let novoCarro = { name, preco, montadora };
+    carros.push(novoCarro);
+
+    return res.json([novoCarro]);
 });
+
 
 app.get('/cars/:id', (req, res) =>{
     let id = req.params.id;
@@ -38,17 +46,20 @@ app.get('/cars/:id', (req, res) =>{
 });
 
 app.put('/cars/update/:id', (req, res) =>{
-    let name = req.body.name;
-    carros[req.params.id] = name;
+    let { name, preco, montadora } = req.body;
+    let id = req.params.id;
 
-    return res.json(carros[req.params.id]);
+    let carroAtualizado = { name, preco, montadora}
+    carros[id] = carroAtualizado;
+
+    return res.json(carros[id]);
 });
 
 app.delete('/cars/delete/:id', (req, res) =>{
     let id = req.params.id;
     carros[id] = null;
 
-    return res.json(carros[id]);
+    return res.json("Carro excluído com sucesso.");
 });
 
 app.listen(3000, () => 
