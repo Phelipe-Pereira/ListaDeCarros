@@ -2,9 +2,13 @@ import express from 'express';
 const app = express();
 
 var carros = [
-    {name: "Focus", montadora: "Ford", ano: 2010},
-    {name: "Fiesta", montadora: "Ford", ano: 2015},
-    {name: "Fusion", montadora: "Ford", ano: 2025}
+    {name: "Focus",preco: 65000 ,montadora: "Ford"},
+    {name: "Fiesta",preco: 50000 ,montadora: "Ford"},
+    {name: "Fusion",preco: 40000 ,montadora: "Ford"},
+    {name: "Civic", preco: 80000, montadora: "Honda"},
+    {name: "Corolla", preco: 75000, montadora: "Toyota"},
+    {name: "Onix", preco: 45000, montadora: "Chevrolet"},
+    {name: "Gol", preco: 40000, montadora: "Volkswagen"}
 ];
 
 app.use(express.urlencoded({ extended: true}))
